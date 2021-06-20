@@ -2,7 +2,9 @@ package zork;
 
 
 import zork.commands.Command;
+import zork.commands.DropCommand;
 import zork.commands.ExitCommand;
+import zork.commands.TakeCommand;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -11,7 +13,9 @@ import java.util.stream.Collectors;
 public class CommandFactory {
 
     private static final List<Class<? extends Command>> REGISTERED_COMMANDS = Arrays.asList(
-            ExitCommand.class
+            ExitCommand.class,
+            TakeCommand.class,
+            DropCommand.class
     );
 
     private static final Map<String,Command> COMMAND_MAP = new HashMap<>();

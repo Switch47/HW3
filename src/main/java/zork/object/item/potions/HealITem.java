@@ -1,6 +1,6 @@
 package zork.object.item.potions;
 
-import object.item.Item;
+import zork.object.item.Item;
 
 public class HealITem extends Item {
 

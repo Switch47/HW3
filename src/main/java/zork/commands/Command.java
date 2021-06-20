@@ -11,4 +11,5 @@ public interface Command {
     String getCommand();
 
     void execute(Game game, List<String> argument);
+
 }

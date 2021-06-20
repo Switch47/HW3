@@ -1,6 +1,6 @@
 package zork.object.item.weapons;
 
-import object.item.Item;
+import zork.object.item.Item;
 
 public class Weapon extends Item {
 

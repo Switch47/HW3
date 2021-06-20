@@ -1,5 +1,7 @@
 package zork.object.monster;
 
+import zork.object.Player;
+
 public class Monster {
 
 
@@ -8,40 +10,35 @@ public class Monster {
     public int attackPower;
     public double hitProb;
     public boolean alive;
+    public int agility;
+    public int expDrop;
     public int level;
-    public int exp;
 
-    public Monster(String name, int HP, int attackPower, double hitProb, int level, int exp) {
+    public Monster(String name, int HP, int attackPower, int agility, double hitProb, int level, int expDrop) {
         this.name = name;
         this.HP = HP;
         this.attackPower = attackPower;
         this.hitProb = hitProb;
+        this.agility = agility;
         this.level = level;
-        this.exp = exp;
+        this.expDrop = expDrop*level;
     }
 
-    public void hpDecrease(int hp) {
+    public void decreaseHP(int hp) {
         HP = HP - hp;
         if (HP <= 0) {
             alive = false;
         }
     }
 
-    public void levelUp(int level) {
-        int increasePower = attackPower*level;
-        int increaseHP = HP*level;
-        attackPower = increasePower;
-        HP = increaseHP;
-    }
-
-    public void gainEXP(int exp) {
-        if (exp >= 100) {
-            this.exp = 0;
-            level = level+1;
-            levelUp(level);
+    public void attack(Player player) {
+        double randomNum = Math.random();
+        if(randomNum < this.hitProb) {
+            player.decreaseHP(this.attackPower);
+            System.out.println("Player HP Remaining : " + player.HP);
         }
         else {
-            this.exp = this.exp + exp;
+            System.out.println("Monster Attack Misses!!!");
         }
     }
 }
