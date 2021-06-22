@@ -24,7 +24,7 @@ public class TakeCommand implements Command{
     public void execute(Game game, List<String> argument) {
         Scanner in = new Scanner(System.in);
         String item;
-        System.out.println("Which item you want to pick??");
+        System.out.println("Which items you want to pick??");
         if (game.currentRoom.items.size() > 0) {
             String x = "Items in this room : [ " + game.currentRoom.items.get(0).name;
             for (int i = 1; i < game.currentRoom.items.size(); i++) {
@@ -39,28 +39,26 @@ public class TakeCommand implements Command{
                     if (it instanceof Weapon) {
                         if (game.player.weapon == null) {
                             game.player.pickWeapon(it);
-                            System.out.println("you receive a new weapon [ " + it.name + " ].");
+                            System.out.println("you receive [ " + it.name + " ].");
                             game.currentRoom.items.remove(it);
-
                             break;
-                        } else {
+                        }
+                        else {
                             System.out.println("You must drop current weapon first.");
                             break;
                         }
                     }
                     else {
                         game.player.takeItems(it);
-                        System.out.println("you receive a new item [ " + it.name + " ].");
+                        System.out.println("you receive [ " + it.name + " ].");
                         game.currentRoom.items.remove(it);
                         break;
                     }
-
                 }
             }
             if (check == 0) {
-                System.out.println("There is no [ " + item + " ] in your inventory.");
+                System.out.println("There is no [ " + item + " ] in this room.");
             }
-
         }
         else {
             System.out.println("There is no any item in this room.");

@@ -24,7 +24,7 @@ public class DropCommand implements Command{
         List<Item> newItems = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         String item;
-        System.out.println("Which item do you want to drop??");
+        System.out.println("Which items do you want to drop??");
         if (game.player.weapon != null) {
             System.out.println("Weapon in your inventory : [ " + game.player.weapon.name + " ]");
         }
@@ -61,11 +61,15 @@ public class DropCommand implements Command{
                     game.currentRoom.setItems(game.player.items.get(i));
                     game.player.items.remove(game.player.items.get(i));
                     System.out.println("[ "+ item + " ] was dropped!!");
+                    break;
                 }
             }
             if (check == 0) {
                 System.out.println("There is no [ " + item + " ] in your inventory.");
             }
+        }
+        else {
+            System.out.println("Your inventory is empty!!");
         }
     }
 }

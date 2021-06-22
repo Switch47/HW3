@@ -27,8 +27,8 @@ public class CommandParser {
         String cleanedInput = stringInput.trim();
         String cmd = matchInputCommand(cleanedInput);
         Command command = CommandFactory.get(cmd);
-        if (command.numArgs() > 0) {
-
+        if (command == null) {}
+        else if (command.numArgs() > 0) {
             String argString = cleanedInput.substring(0,cmd.length() + 1);
             System.out.println(argString);
             return Arrays.asList(cmd, argString);
@@ -36,5 +36,6 @@ public class CommandParser {
         else {
             return Arrays.asList(cmd);
         }
+        return Arrays.asList(cmd);
     }
 }

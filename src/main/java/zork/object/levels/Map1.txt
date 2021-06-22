@@ -1,0 +1,8 @@
+name level1
+object weapon
+start room2
+right room1 room2
+right room2 room3
+setItem:room2:long sword:potion
+setItem:room1:gun
+setItem:room3:sword

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Room {
 
+    public String name;
     public Room upRoom;
     public Room downRoom;
     public Room leftRoom;
@@ -26,6 +27,14 @@ public class Room {
 //        this.item = null;
         this.monster = null;
         items = new ArrayList<>();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setUpRoom(Room upRoom) {
@@ -48,16 +57,25 @@ public class Room {
         rightRoom.leftRoom = this;
     }
 
-//    public void setItem(Item item) {
-//        this.item = item;
-//    }
-
     public void setItems(Item item) {
         this.items.add(item);
     }
 
     public void setMonster(Monster monster) {
         this.monster = monster;
+    }
+
+    public boolean isMonsterExist() {
+        if(this.monster != null) {
+            return true;
+        }
+        return false;
+    }
+    public void removeMonster() {
+        this.monster = null;
+    }
+    public Monster getMonster() {
+        return this.monster;
     }
 
 }
