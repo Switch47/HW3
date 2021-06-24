@@ -11,7 +11,7 @@ public class Player {
 
     public Boolean alive;
     public int HP;
-    public static final int MAX_HP = 100;
+    public static int MAX_HP = 100;
     public int strength;
     public Item weapon;
     public List<Item> items;
@@ -91,12 +91,14 @@ public class Player {
 //    }
 
     public void levelUp(int level) {
+        System.out.println("###!!LEVEL UP!!###");
         int increasePower = strength*level;
-        int increaseHP = HP*level;
+        int increaseHP = MAX_HP*level;
         int newMAX_EXP = MAX_EXP*level;
         strength = increasePower;
-        HP = increaseHP;
+        MAX_HP = increaseHP;
         MAX_EXP = newMAX_EXP;
+        HP = MAX_HP;
 
     }
 

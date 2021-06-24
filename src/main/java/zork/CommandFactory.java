@@ -18,7 +18,11 @@ public class CommandFactory {
             UpCommand.class,
             DownCommand.class,
             InfoCommand.class,
-            AttackCommand.class
+            AttackCommand.class,
+            InventoryCommand.class,
+            HelpCommand.class,
+            PlayCommand.class,
+            QuitCommand.class
     );
 
     private static final Map<String,Command> COMMAND_MAP = new HashMap<>();

@@ -1,4 +1,4 @@
-name level1
+name:ATutorial
 object weapon
 start room2
 right room1 room2

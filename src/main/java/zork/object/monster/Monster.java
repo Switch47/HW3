@@ -28,7 +28,7 @@ public class Monster {
 
     public void decreaseHP(int hp) {
         HP = HP - hp;
-        if (HP <= 0) {
+        if (HP < 1) {
             alive = false;
         }
     }
@@ -37,6 +37,7 @@ public class Monster {
         double randomNum = Math.random();
         if(randomNum < this.hitProb) {
             player.decreaseHP(this.strength);
+            System.out.println("ACTION : Monster is attacking you.");
             System.out.println("Player HP Remaining : " + player.HP);
         }
         else {

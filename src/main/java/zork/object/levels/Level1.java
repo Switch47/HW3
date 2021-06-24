@@ -9,10 +9,12 @@ import zork.object.monster.Monster;
 import zork.object.monster.MonsterFactory;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +25,17 @@ public class Level1 extends Level {
     public Map<String,Room> roomLevel;
 
     public Level1() {
-        loadMap("C:\\Users\\USER\\IdeaProjects\\Software System\\hw3\\src\\main\\java\\zork\\object\\levels\\Map2.txt");
+    }
+
+    public String makeFile(String filename) {
+        String filenameX = filename.split("/")[filename.split("/").length-1];
+        String filenameY = filenameX.split(".txt")[0];
+        return filenameY;
     }
 
     public void loadMap(String filename) {
         try {
+            this.name = makeFile(filename);
             roomLevel = new HashMap<>();
             Path filePath = new File(filename).toPath();
             Charset charset = Charset.defaultCharset();
@@ -42,8 +50,8 @@ public class Level1 extends Level {
                     startRoom = x;
                     roomLevel.put(stringArray[i].split(" ")[1],x);
                 }
-                else if (stringArray[i].split(" ")[0].equals("name")) {
-                    name = stringArray[i].split(" ")[1];
+                else if (stringArray[i].split(":")[0].equals("name")) {
+                    name = stringArray[i].split(":")[1];
                 }
                 else if (stringArray[i].split(" ")[0].equals("object")) {
                     object = stringArray[i].split(" ")[1];
@@ -58,64 +66,64 @@ public class Level1 extends Level {
                     }
                 }
                 else if (stringArray[i].split(" ")[0].equals("right")) {
-                    String namex = stringArray[i].split(" ")[1];
-                    String namey = stringArray[i].split(" ")[2];
-                    if (!roomLevel.containsKey(namex)) {
+                    String nameX = stringArray[i].split(" ")[1];
+                    String nameY = stringArray[i].split(" ")[2];
+                    if (!roomLevel.containsKey(nameX)) {
                         Room x = new Room();
-                        x.name = namex;
-                        roomLevel.put(namex,x);
+                        x.name = nameX;
+                        roomLevel.put(nameX,x);
                     }
-                    if (!roomLevel.containsKey(namey)) {
+                    if (!roomLevel.containsKey(nameY)) {
                         Room y = new Room();
-                        y.name = namey;
-                        roomLevel.put(namey,y);
+                        y.name = nameY;
+                        roomLevel.put(nameY,y);
                     }
-                    roomLevel.get(namex).setRightRoom(roomLevel.get(namey));
+                    roomLevel.get(nameX).setRightRoom(roomLevel.get(nameY));
                 }
                 else if (stringArray[i].split(" ")[0].equals("left")) {
-                    String namex = stringArray[i].split(" ")[1];
-                    String namey = stringArray[i].split(" ")[2];
-                    if (!roomLevel.containsKey(namex)) {
+                    String nameX = stringArray[i].split(" ")[1];
+                    String nameY = stringArray[i].split(" ")[2];
+                    if (!roomLevel.containsKey(nameX)) {
                         Room x = new Room();
-                        x.name = namex;
-                        roomLevel.put(namex,x);
+                        x.name = nameX;
+                        roomLevel.put(nameX,x);
                     }
-                    if (!roomLevel.containsKey(namey)) {
+                    if (!roomLevel.containsKey(nameY)) {
                         Room y = new Room();
-                        y.name = namey;
-                        roomLevel.put(namey,y);
+                        y.name = nameY;
+                        roomLevel.put(nameY,y);
                     }
-                    roomLevel.get(namex).setLeftRoom(roomLevel.get(namey));
+                    roomLevel.get(nameX).setLeftRoom(roomLevel.get(nameY));
                 }
                 else if (stringArray[i].split(" ")[0].equals("up")) {
-                    String namex = stringArray[i].split(" ")[1];
-                    String namey = stringArray[i].split(" ")[2];
-                    if (!roomLevel.containsKey(namex)) {
+                    String nameX = stringArray[i].split(" ")[1];
+                    String nameY = stringArray[i].split(" ")[2];
+                    if (!roomLevel.containsKey(nameX)) {
                         Room x = new Room();
-                        x.name = namex;
-                        roomLevel.put(namex,x);
+                        x.name = nameX;
+                        roomLevel.put(nameX,x);
                     }
-                    if (!roomLevel.containsKey(namey)) {
+                    if (!roomLevel.containsKey(nameY)) {
                         Room y = new Room();
-                        y.name = namey;
-                        roomLevel.put(namey,y);
+                        y.name = nameY;
+                        roomLevel.put(nameY,y);
                     }
-                    roomLevel.get(namex).setUpRoom(roomLevel.get(namey));
+                    roomLevel.get(nameX).setUpRoom(roomLevel.get(nameY));
                 }
                 else if (stringArray[i].split(" ")[0].equals("down")) {
-                    String namex = stringArray[i].split(" ")[1];
-                    String namey = stringArray[i].split(" ")[2];
-                    if (!roomLevel.containsKey(namex)) {
+                    String nameX = stringArray[i].split(" ")[1];
+                    String nameY = stringArray[i].split(" ")[2];
+                    if (!roomLevel.containsKey(nameX)) {
                         Room x = new Room();
-                        x.name = namex;
-                        roomLevel.put(namex,x);
+                        x.name = nameX;
+                        roomLevel.put(nameX,x);
                     }
-                    if (!roomLevel.containsKey(namey)) {
+                    if (!roomLevel.containsKey(nameY)) {
                         Room y = new Room();
-                        y.name = namey;
-                        roomLevel.put(namey,y);
+                        y.name = nameY;
+                        roomLevel.put(nameY,y);
                     }
-                    roomLevel.get(namex).setDownRoom(roomLevel.get(namey));
+                    roomLevel.get(nameX).setDownRoom(roomLevel.get(nameY));
                 }
                 else if (stringArray[i].split(":")[0].equals("setItem")) {
                     String room = stringArray[i].split(":")[1];
@@ -183,4 +191,13 @@ public class Level1 extends Level {
         }
         return false;
     }
+
+    public static void main(String[] args) {
+        Level1 level = new Level1();
+        String filename = "name:House of the death";
+        String y = filename.split(":")[1];
+        System.out.println(y);
+    }
+
 }
+

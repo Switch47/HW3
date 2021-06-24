@@ -8,12 +8,20 @@ import zork.object.levels.Level;
 import zork.object.levels.Level1;
 import zork.object.monster.Monster;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Game {
+
+    private static boolean gameStatus;
+
+    public static final boolean PLAY_STATUS = false;
+
+    public static final boolean HOME_STATUS = true;
 
     public static Player player;
 
@@ -27,34 +35,99 @@ public class Game {
 
     public static List<Level> listOfLevels = new ArrayList<Level>();
 
-    public void run() {
+    public Game() {
+        setStartMenu();
+        setMap();
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            String s = in.nextLine();
+            List<String> words = commandParser.parse(s);
+            Command command = CommandFactory.get(words.get(0));
+            if (command != null) {
+                command.execute(this, words.subList(1, words.size()));
+            } else {
+                System.out.println("Unknown command [" + s + "].");
+            }
+        }
+
+    }
+
+//    public void loadListMap() {
+//        Level1 map = new Level1();
+//        try {
+//            File f = new File("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map");
+//
+//            FilenameFilter filter = new FilenameFilter() {
+//                @Override
+//                public boolean accept(File f, String name) {
+//                    // We want to find only .c files
+//                    return name.endsWith(".txt");
+//                }
+//            };
+//
+//            // Note that this time we are using a File class as an array,
+//            // instead of String
+//            File[] files = f.listFiles(filter);
+//
+//            // Get the names of the files by using the .getName() method
+//            for (int i = 0; i < files.length; i++) {
+////                    String filename = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//" + files[i].getName();
+//                map.name = files[i].getName().split(".txt")[0];
+////                    this.loadMap(filename);
+//                this.listOfLevels.add(map);
+//            }
+//        } catch (Exception e) {
+//            System.err.println(e.getMessage());
+//        }
+//
+//    }
+
+    public void setMap() {
         player = new Player();
         Level1 level1 = new Level1();
+        Level1 level2 = new Level1();
+        level1.loadMap("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//ATutorial.txt");
+        level2.loadMap("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//House of the death.txt");
         listOfLevels.add(level1);
+        listOfLevels.add(level2);
+    }
 
-        for (Level level : listOfLevels) {
-            currentLevel = level;
-            System.out.println("Welcome to " + level.name);
-            System.out.println("Your objective is to " + level.objective);
-            currentRoom = level.startRoom;
-            while (true) {
-                Scanner in = new Scanner(System.in);
-                String s = in.nextLine();
-                List<String> words = commandParser.parse(s);
-                Command command = CommandFactory.get(words.get(0));
-                if (command != null) {
-                    command.execute(this, words.subList(1, words.size()));
-                }
-                else {
-                    System.out.println("Unknown command [" + s + "].");
-                }
-                if (level.objectiveCompleted()){
-                    System.out.println("!!!!Objective completed!!!!");
-                    this.exit();
-                }
+    public void inGame(Level level) {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            String s = in.nextLine();
+            List<String> words = commandParser.parse(s);
+            Command command = CommandFactory.get(words.get(0));
+            if (command != null) {
+                command.execute(this, words.subList(1, words.size()));
+            } else {
+                System.out.println("Unknown command [" + s + "].");
             }
-
+            if (level.objectiveCompleted()) {
+                System.out.println("---------------------------");
+                System.out.println("!!!!Objective completed!!!!");
+                System.out.println("  !!Go back to the menu!!  ");
+                System.out.println("---------------------------");
+                setStartMenu();
+            }
         }
+    }
+
+    public static boolean getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setStartPlay() {
+        gameStatus = PLAY_STATUS;
+    }
+
+    public void setStartMenu() {
+        System.out.println("!!!Welcome to Zork Game!!!");
+        System.out.println("          [play]          ");
+        System.out.println("          [load]          ");
+        System.out.println("          [help]          ");
+        System.out.println("          [exit]          ");
+        gameStatus = HOME_STATUS;
     }
 
     public GameOutput getOutput() {
@@ -81,13 +154,10 @@ public class Game {
                         System.out.println("Monster HP : " + monster.HP + " / " + monster.MAX_HP);
                         System.out.println("--------------------------------");
                         System.out.println("ACTION : [ attack ] [ inventory ]");
-                        System.out.println(player.HP);
                         String command = in.nextLine();
                         if (command.equals("attack")) {
                             int totalAttackPower = (player.strength + player.weapon.strength);
                             monster.decreaseHP(totalAttackPower);
-                            System.out.println(monster.HP);
-                            System.out.println(monster.alive);
                             fightState = !fightState;
                         }
                         else if (command.equals("inventory")) {
@@ -101,12 +171,12 @@ public class Game {
                                 for (Item item : player.items) {
                                     if (useItemCommand.equals("use " + item.name)) {
                                         System.out.println(item.skill);
-                                        player.increaseHP(item.addHP);
+                                        this.player.increaseHP(item.addHP);
                                         player.items.remove(item);
                                         fightState = !fightState;
                                         break;
-                                    } else if (!useItemCommand.equals("use ")) {
-                                        System.out.println("There is no [ " + useItemCommand + " ] command.");
+                                    } else if (!useItemCommand.equals("use")) {
+                                        System.out.println("TYPE -> [ use 'item name' ]");
                                     } else {
                                         System.out.println("There is no [ " + useItemCommand.split("use ")[0] + " ] in your inventory.");
                                     }
@@ -118,17 +188,18 @@ public class Game {
                         }
                         else {
                             System.out.println("!!Unknown Command!!");
+                            System.out.println("Your Attack Misses!!!");
                         }
                     } else {
                         return false;
                     }
                     if (monster.alive == true) {
                         System.out.println("------------" + monster.name + " TURN-----------");
-                        player.decreaseHP(monster.strength);
-                        System.out.println("ACTION : Monster is attacking you.");
+                        monster.attack(player);
                         fightState = !fightState;
-                    } else {
-                        System.out.println(monster.name + " was defeated");
+                    }
+                    else {
+                        System.out.println("*****" + monster.name + " was defeated*****");
                         return true;
                     }
                 }
@@ -136,12 +207,11 @@ public class Game {
                     System.out.println(monster.name + " is faster than you.");
                     if (monster.alive == true) {
                         System.out.println("------------" + monster.name + " TURN-----------");
-                        player.decreaseHP(monster.strength);
-                        System.out.println("ACTION : Monster is attacking you.");
+                        monster.attack(player);
                         fightState = !fightState;
                     }
                     else {
-                        System.out.println(monster.name + " was defeated");
+                        System.out.println("*****" + monster.name + " was defeated*****");
                         return true;
                     }
                     if (player.alive == true) {
@@ -173,7 +243,7 @@ public class Game {
                                         player.items.remove(item);
                                         fightState = !fightState;
                                     } else if (!useItemCommand.equals("use ")) {
-                                        System.out.println("There is no [ " + useItemCommand + " ] command.");
+                                        System.out.println("TYPE -> [ use 'item name' ]");
                                     } else {
                                         System.out.println("There is no [ " + useItemCommand.split("use ")[0] + " ] in your inventory.");
                                     }
@@ -185,6 +255,7 @@ public class Game {
                         }
                         else {
                             System.out.println("!!Unknown Command!!");
+                            System.out.println("Your Attack Misses!!!");
                         }
                     } else {
                         return false;
@@ -223,7 +294,7 @@ public class Game {
                                         player.items.remove(item);
                                         fightState = !fightState;
                                     } else if (!useItemCommand.equals("use ")) {
-                                        System.out.println("There is no [ " + useItemCommand + " ] command.");
+                                        System.out.println("TYPE -> [ use 'item name' ]");;
                                     } else {
                                         System.out.println("There is no [ " + useItemCommand.split("use ")[0] + " ] in your inventory.");
                                     }
@@ -235,28 +306,27 @@ public class Game {
                         }
                         else {
                             System.out.println("!!Unknown Command!!");
+                            System.out.println("Your Attack Misses!!!");
                         }
                     } else {
                         return false;
                     }
                     if (monster.alive == true) {
                         System.out.println("------------" + monster.name + " TURN-----------");
-                        player.decreaseHP(monster.strength);
-                        System.out.println("ACTION : Monster is attacking you.");
+                        monster.attack(player);
                         fightState = !fightState;
                     } else {
-                        System.out.println(monster.name + " was defeated");
+                        System.out.println("*****" + monster.name + " was defeated*****");
                         return true;
                     }
                 } else {
                     System.out.println(monster.name + " is faster than you.");
                     if (monster.alive == true) {
                         System.out.println("------------" + monster.name + " TURN-----------");
-                        player.decreaseHP(monster.strength);
-                        System.out.println("ACTION : Monster is attacking you.");
+                        monster.attack(player);
                         fightState = !fightState;
                     } else {
-                        System.out.println(monster.name + " was defeated");
+                        System.out.println("*****" + monster.name + " was defeated*****");
                         return true;
                     }
                     if (player.alive == true) {
@@ -288,7 +358,7 @@ public class Game {
                                         player.items.remove(item);
                                         fightState = !fightState;
                                     } else if (!useItemCommand.equals("use ")) {
-                                        System.out.println("There is no [ " + useItemCommand + " ] command.");
+                                        System.out.println("TYPE -> [ use 'item name' ]");
                                     } else {
                                         System.out.println("There is no [ " + useItemCommand.split("use ")[0] + " ] in your inventory.");
                                     }
@@ -300,6 +370,7 @@ public class Game {
                         }
                         else {
                             System.out.println("!!Unknown Command!!");
+                            System.out.println("Your Attack Misses!!!");
                         }
                     } else {
                         return false;
@@ -307,8 +378,5 @@ public class Game {
                 }
             }
         }
-    }
-    public static void main(String[] args) {
-
     }
 }
