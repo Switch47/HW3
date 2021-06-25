@@ -22,20 +22,20 @@ public class PlayCommand implements Command{
 
     @Override
     public void execute(Game game, List<String> argument) throws IOException {
-        if (game.getGameStatus() == game.HOME_STATUS) {
-            game.player = new Player();
+        if (Game.getGameStatus() == Game.HOME_STATUS) {
+            Game.player = new Player();
             Scanner sc  = new Scanner(System.in);
-            boolean check = false;
-            while (check == false) {
-                String x = "[ CHAPTER ] -> [ " + game.listOfLevels.get(0).name + " ] ";
-                for (int i = 1; i < game.listOfLevels.size(); i++) {
-                    x += ", [ " + game.listOfLevels.get(i).name + " ] ";
+//            boolean check = false;
+            while (true) {
+                StringBuilder x = new StringBuilder("[ CHAPTER ] -> [ " + Game.listOfLevels.get(0).name + " ] ");
+                for (int i = 1; i < Game.listOfLevels.size(); i++) {
+                    x.append(", [ ").append(Game.listOfLevels.get(i).name).append(" ] ");
                 }
                 System.out.println(x);
                 System.out.println("[ back ]");
                 System.out.println("TYPE : {map name} or {back}");
                 String levelName = sc.next();
-                if (levelName.toLowerCase().equals("back")) {
+                if (levelName.equalsIgnoreCase("back")) {
                     System.out.println("  Back to the main menu!  ");
                     System.out.println("--------------------------");
                     game.setStartMenu();
@@ -43,16 +43,16 @@ public class PlayCommand implements Command{
                 }
                 else {
                     int count = 0;
-                    for (Level level : game.listOfLevels) {
-                        if (level.name.toLowerCase().equals(levelName.toLowerCase())) {
+                    for (Level level : Game.listOfLevels) {
+                        if (level.name.equalsIgnoreCase(levelName)) {
                             count = count + 1;
                         }
                     }
                     if (count == 0) {
                         System.out.println("There is no [ " + levelName + " ] map.");
                     } else {
-                        for (Level level : game.listOfLevels) {
-                            if (level.name.toLowerCase().equals(levelName.toLowerCase())) {
+                        for (Level level : Game.listOfLevels) {
+                            if (level.name.equalsIgnoreCase(levelName)) {
                                 game.setStartPlay();
                                 game.inGame(level);
                             }

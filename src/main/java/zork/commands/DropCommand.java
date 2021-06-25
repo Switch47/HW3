@@ -1,10 +1,6 @@
 package zork.commands;
 
 import zork.Game;
-import zork.object.item.Item;
-import zork.object.item.weapons.Weapon;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,20 +17,19 @@ public class DropCommand implements Command{
 
     @Override
     public void execute(Game game, List<String> argument) {
-        if (game.getGameStatus() == game.PLAY_STATUS) {
-            List<Item> newItems = new ArrayList<>();
+        if (Game.getGameStatus() == Game.PLAY_STATUS) {
             Scanner in = new Scanner(System.in);
             String item;
             System.out.println("Which items do you want to drop??");
-            if (game.player.weapon != null) {
-                System.out.println("Weapon in your inventory : [ " + game.player.weapon.name + " ]");
+            if (Game.player.weapon != null) {
+                System.out.println("Weapon in your inventory : [ " + Game.player.weapon.name + " ]");
             } else {
                 System.out.println("**There is no weapon in your inventory**");
             }
-            if (game.player.items.size() > 0) {
-                String x = "Items in your Inventory : [ " + game.player.items.get(0).name;
-                for (int i = 1; i < game.player.items.size(); i++) {
-                    x += " , " + game.player.items.get(i).name;
+            if (Game.player.items.size() > 0) {
+                StringBuilder x = new StringBuilder("Items in your Inventory : [ " + Game.player.items.get(0).name);
+                for (int i = 1; i < Game.player.items.size(); i++) {
+                    x.append(" , ").append(Game.player.items.get(i).name);
                 }
                 System.out.println(x + " ]");
             } else {
@@ -43,34 +38,34 @@ public class DropCommand implements Command{
 
             item = in.nextLine();
             int check = 0;
-            if (game.player.items.size() > 0) {
-                for (int i = 0; i < game.player.items.size(); i++) {
-                    if (item.equals(game.player.items.get(i).name)) {
+            if (Game.player.items.size() > 0) {
+                for (int i = 0; i < Game.player.items.size(); i++) {
+                    if (item.equals(Game.player.items.get(i).name)) {
                         check += 1;
                     }
                 }
                 if (check > 0){
-                    for (int i = 0; i < game.player.items.size(); i++) {
-                        if (item.equals(game.player.items.get(i).name)) {
-                            game.currentRoom.setItems(game.player.items.get(i));
-                            game.player.items.remove(game.player.items.get(i));
+                    for (int i = 0; i < Game.player.items.size(); i++) {
+                        if (item.equals(Game.player.items.get(i).name)) {
+                            Game.currentRoom.setItems(Game.player.items.get(i));
+                            Game.player.items.remove(Game.player.items.get(i));
                             System.out.println("[ " + item + " ] was dropped!!");
                             break;
                         }
                     }
                 }
             }
-            if (game.player.weapon != null) {
-                if (item.equals(game.player.weapon.name)) {
-                    game.currentRoom.setItems(game.player.weapon);
-                    game.player.weapon = null;
+            if (Game.player.weapon != null) {
+                if (item.equals(Game.player.weapon.name)) {
+                    Game.currentRoom.setItems(Game.player.weapon);
+                    Game.player.weapon = null;
                     System.out.println("[ " + item + " ] was dropped!!");
                 }
-                else if (!item.equals(game.player.weapon.name) && check == 0){
+                else if (check == 0){
                     System.out.println("There is no [ " + item + " ] in your inventory");
                 }
             }
-            if (game.player.weapon == null && game.player.items.size() <= 0) {
+            if (Game.player.weapon == null && Game.player.items.size() <= 0) {
                 System.out.println("Your inventory is now empty!!");
             }
         }

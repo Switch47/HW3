@@ -17,33 +17,33 @@ public class RightCommand implements Command {
 
     @Override
     public void execute(Game game, List<String> argument) {
-        if (game.getGameStatus() == game.PLAY_STATUS) {
+        if (Game.getGameStatus() == Game.PLAY_STATUS) {
             if (Game.currentRoom.rightRoom != null) {
                 Game.currentRoom = Game.currentRoom.rightRoom;
-                game.player.increaseHP(2);
+                Game.player.increaseHP(2);
                 System.out.println("Now you are in : [ " + Game.currentRoom.name + " ]");
                 String x = "Available Exit : |";
-                if (game.currentRoom.rightRoom != null) {
-                    x = x + " EAST : " + game.currentRoom.rightRoom.name + " |";
+                if (Game.currentRoom.rightRoom != null) {
+                    x = x + " EAST : " + Game.currentRoom.rightRoom.name + " |";
                 }
-                if (game.currentRoom.leftRoom != null) {
-                    x = x + " WEST : " + game.currentRoom.leftRoom.name + " |";
+                if (Game.currentRoom.leftRoom != null) {
+                    x = x + " WEST : " + Game.currentRoom.leftRoom.name + " |";
                 }
-                if (game.currentRoom.upRoom != null) {
-                    x = x + " NORTH : " + game.currentRoom.upRoom.name + " |";
+                if (Game.currentRoom.upRoom != null) {
+                    x = x + " NORTH : " + Game.currentRoom.upRoom.name + " |";
                 }
-                if (game.currentRoom.downRoom != null) {
-                    x = x + " SOUTH : " + game.currentRoom.downRoom.name + " |";
+                if (Game.currentRoom.downRoom != null) {
+                    x = x + " SOUTH : " + Game.currentRoom.downRoom.name + " |";
                 }
-                if (game.currentRoom.downRoom == null
-                        && game.currentRoom.upRoom == null
-                        && game.currentRoom.leftRoom == null
-                        && game.currentRoom.rightRoom == null) {
+                if (Game.currentRoom.downRoom == null
+                        && Game.currentRoom.upRoom == null
+                        && Game.currentRoom.leftRoom == null
+                        && Game.currentRoom.rightRoom == null) {
                     System.out.println("You are trapped!!!");
                     System.out.println("This is a locked room!!!");
                 }
                 System.out.println(x);
-                if (game.currentRoom.isMonsterExist()) {
+                if (Game.currentRoom.isMonsterExist()) {
                     System.out.println("There is a monster in this room!!!");
                 }
             } else {
