@@ -20,7 +20,7 @@ public class RightCommand implements Command {
         if (game.getGameStatus() == game.PLAY_STATUS) {
             if (Game.currentRoom.rightRoom != null) {
                 Game.currentRoom = Game.currentRoom.rightRoom;
-                Game.player.increaseHP(2);
+                game.player.increaseHP(2);
                 System.out.println("Now you are in : [ " + Game.currentRoom.name + " ]");
                 String x = "Existing Door : |";
                 if (game.currentRoom.rightRoom != null) {

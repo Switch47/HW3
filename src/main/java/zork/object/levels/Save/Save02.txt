@@ -1,0 +1,29 @@
+name:EvilHouse
+object monster
+start bathroom1
+right bedroom1 hallway1
+right hallway1 hallway2
+down hallway2 bedroom2
+left bedroom2 bathroom1
+right hallway2 hallway3
+right hallway3 bedroom3
+up bedroom3 bathroom2
+up hallway3 hallway4
+left hallway4 livingroom
+left livingroom kitchen
+left kitchen bathroom3
+up bedroom1 bathroom3
+down hallway3 garden1
+right garden1 garden2
+up livingroom garage1
+left garage1 garage2
+left garage2 garage3
+up hallway4 outside
+setItem:garden2:potion
+setItem:garden2:potion
+setItem:garage3:potion
+setItem:bedroom1:gun
+setMonster:garage2:zombie
+setMonster:kitchen:zombie
+setPlayer:64:100:10:sword:10:50:1:100
+setPlayerItems:potion

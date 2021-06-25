@@ -77,5 +77,11 @@ public class Room {
     public Monster getMonster() {
         return this.monster;
     }
+    public boolean isItems() {
+        if (items.size() > 0) {
+            return true;
+        }
+        return false;
+    }
 
 }

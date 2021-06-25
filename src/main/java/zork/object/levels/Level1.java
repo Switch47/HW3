@@ -2,6 +2,7 @@ package zork.object.levels;
 
 
 import zork.Game;
+import zork.object.Player;
 import zork.object.Room;
 import zork.object.item.Item;
 import zork.object.item.ItemFactory;
@@ -9,33 +10,24 @@ import zork.object.monster.Monster;
 import zork.object.monster.MonsterFactory;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class Level1 extends Level {
 
-    public String object;
-    public Map<String,Room> roomLevel;
+
 
     public Level1() {
     }
 
-    public String makeFile(String filename) {
-        String filenameX = filename.split("/")[filename.split("/").length-1];
-        String filenameY = filenameX.split(".txt")[0];
-        return filenameY;
-    }
 
     public void loadMap(String filename) {
         try {
-            this.name = makeFile(filename);
             roomLevel = new HashMap<>();
             Path filePath = new File(filename).toPath();
             Charset charset = Charset.defaultCharset();
@@ -165,6 +157,46 @@ public class Level1 extends Level {
                         }
                     }
                 }
+                else if (stringArray[i].split(":")[0].equals("setPlayer")) {
+                    String x = stringArray[i];
+                    Game.player.HP = Integer.valueOf(x.split(":")[1]);
+                    Game.player.MAX_EXP = Integer.valueOf(x.split(":")[2]);
+                    Game.player.strength = Integer.valueOf(x.split(":")[3]);
+                    Item item = null;
+                    if (x.split(":")[4].equals("gun")) {
+                        item = itemFactory.createGun();
+                        Game.player.weapon = item;
+                    }
+                    else if (x.split(":")[4].equals("long sword")) {
+                        item = itemFactory.createLongSword();
+                        Game.player.weapon = item;
+                    }
+                    else if (x.split(":")[4].equals("sword")) {
+                        item = itemFactory.createSword();
+                        Game.player.weapon = item;
+                    }
+                    else if (x.split(":")[4].equals("knife")) {
+                        item = itemFactory.createKnife();
+                        Game.player.weapon = item;
+                    }
+                    Game.player.agility = Integer.valueOf(x.split(":")[5]);
+                    Game.player.exp = Integer.valueOf(x.split(":")[6]);
+                    Game.player.level = Integer.valueOf(x.split(":")[7]);
+                    Game.player.MAX_EXP = Integer.valueOf(x.split(":")[8]);
+                }
+                else if (stringArray[i].split(":")[0].equals("setPlayerItems")) {
+                    for (int j = 1; j < stringArray[i].split(":").length-1; i++) {
+                        Item item = null;
+                        if (stringArray[i].split(":")[j].equals("potion")) {
+                            item = itemFactory.createPotion();
+                            Game.player.items.add(item);
+                        }
+                        else if (stringArray[i].split(":")[j].equals("super potion")) {
+                            item = itemFactory.createSuperPotion();
+                            Game.player.items.add(item);
+                        }
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -190,13 +222,6 @@ public class Level1 extends Level {
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        Level1 level = new Level1();
-        String filename = "name:House of the death";
-        String y = filename.split(":")[1];
-        System.out.println(y);
     }
 
 }

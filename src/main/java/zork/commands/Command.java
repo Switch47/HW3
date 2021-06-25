@@ -2,6 +2,7 @@ package zork.commands;
 
 import zork.Game;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface Command {
@@ -10,6 +11,6 @@ public interface Command {
 
     String getCommand();
 
-    void execute(Game game, List<String> argument);
+    void execute(Game game, List<String> argument) throws IOException;
 
 }

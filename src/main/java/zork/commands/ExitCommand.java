@@ -21,18 +21,53 @@ public class ExitCommand implements Command{
     @Override
     public void execute(Game game, List<String> args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("---------------------------");
-        System.out.println("Do you want to exit game ?");
-        System.out.println("[ EXIT ] : [ YES ] / [ NO ]");
-        String result = in.nextLine();
-        if (result.toUpperCase().equals("YES")) {
-            game.getOutput().println("Game exit");
-            System.out.println("---------------------------");
-            game.exit();
+        boolean x = false;
+        if (game.getGameStatus() == game.HOME_STATUS) {
+            while (x == false) {
+                System.out.println("---------------------------");
+                System.out.println("Do you want to exit game ?");
+                System.out.println("[ EXIT ] : [ YES ] / [ NO ]");
+                String result = in.nextLine();
+                if (result.toUpperCase().equals("YES")) {
+                    game.getOutput().println("Game exit");
+                    System.out.println("---------------------------");
+                    game.exit();
+                    break;
+                }
+                else if (result.toUpperCase().equals("NO")){
+                    System.out.println("---------------------------");
+                    game.setStartMenu();
+                    break;
+                }
+                else {
+                    System.out.println("!!Unknown Command!!");
+                    System.out.println("TYPE : only yes or no");
+                }
+            }
         }
-        else {
-            System.out.println("---------------------------");
-            game.setStartMenu();
+        else if (game.getGameStatus() == game.PLAY_STATUS){
+            while (x == false) {
+                System.out.println("---------------------------");
+                System.out.println("Do you want to exit game ?");
+                System.out.println("[ EXIT ] : [ YES ] / [ NO ]");
+                String result = in.nextLine();
+                if (result.toUpperCase().equals("YES")) {
+                    game.getOutput().println("Game exit");
+                    System.out.println("---------------------------");
+                    game.exit();
+                    break;
+                }
+                else if (result.toUpperCase().equals("NO")){
+                    System.out.println("Continue Playing");
+                    System.out.println("---------------------------");
+                    System.out.println("Now you are in " + game.currentRoom.name);
+                    break;
+                }
+                else {
+                    System.out.println("!!Unknown Command!!");
+                    System.out.println("TYPE : only yes or no");
+                }
+            }
         }
 
     }

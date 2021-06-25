@@ -11,7 +11,7 @@ public class Player {
 
     public Boolean alive;
     public int HP;
-    public static int MAX_HP = 100;
+    public static int MAX_HP;
     public int strength;
     public Item weapon;
     public List<Item> items;
@@ -22,6 +22,7 @@ public class Player {
 
     public Player() {
         alive = true;
+        MAX_HP = 100;
         HP = MAX_HP;
         strength = 10;
         weapon = null;

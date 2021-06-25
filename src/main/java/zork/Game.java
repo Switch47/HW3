@@ -7,11 +7,9 @@ import zork.object.item.Item;
 import zork.object.levels.Level;
 import zork.object.levels.Level1;
 import zork.object.monster.Monster;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -36,8 +34,11 @@ public class Game {
     public static List<Level> listOfLevels = new ArrayList<Level>();
 
     public Game() {
+    }
+    public void run() throws IOException {
         setStartMenu();
         setMap();
+        player = new Player();
         while (true) {
             Scanner in = new Scanner(System.in);
             String s = in.nextLine();
@@ -49,7 +50,6 @@ public class Game {
                 System.out.println("Unknown command [" + s + "].");
             }
         }
-
     }
 
 //    public void loadListMap() {
@@ -83,16 +83,22 @@ public class Game {
 //    }
 
     public void setMap() {
-        player = new Player();
         Level1 level1 = new Level1();
         Level1 level2 = new Level1();
         level1.loadMap("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//ATutorial.txt");
-        level2.loadMap("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//House of the death.txt");
+        level2.loadMap("C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Map//EvilHouse.txt");
         listOfLevels.add(level1);
         listOfLevels.add(level2);
     }
 
-    public void inGame(Level level) {
+    public void inGame(Level level) throws IOException {
+        currentLevel = level;
+        System.out.println("Welcome to " + level.name);
+        System.out.println("***PLEASE READ***");
+        System.out.println("Your objective is to " + level.objective);
+        System.out.println("TYPE [ help ] : to print all command!!");
+        currentRoom = level.startRoom;
+        System.out.println("Now you are in " + currentRoom.name);
         while (true) {
             Scanner in = new Scanner(System.in);
             String s = in.nextLine();
