@@ -25,5 +25,5 @@ setItem:garage3:potion
 setItem:bedroom1:gun
 setMonster:garage2:zombie
 setMonster:kitchen:zombie
-setPlayer:64:100:10:sword:10:50:1:100
+setPlayer:55:100:10:sword:10:50:1:100
 setPlayerItems:potion

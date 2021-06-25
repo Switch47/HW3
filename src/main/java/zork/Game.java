@@ -200,24 +200,24 @@ public class Game {
                         return false;
                     }
                     if (monster.alive == true) {
-                        System.out.println("------------" + monster.name + " TURN-----------");
+                        System.out.println("------------" + monster.name.toUpperCase() + " TURN-----------");
                         monster.attack(player);
                         fightState = !fightState;
                     }
                     else {
-                        System.out.println("*****" + monster.name + " was defeated*****");
+                        System.out.println("*****" + monster.name.toUpperCase() + " was defeated*****");
                         return true;
                     }
                 }
                 else {
                     System.out.println(monster.name + " is faster than you.");
                     if (monster.alive == true) {
-                        System.out.println("------------" + monster.name + " TURN-----------");
+                        System.out.println("------------" + monster.name.toUpperCase() + " TURN-----------");
                         monster.attack(player);
                         fightState = !fightState;
                     }
                     else {
-                        System.out.println("*****" + monster.name + " was defeated*****");
+                        System.out.println("*****" + monster.name.toUpperCase() + " was defeated*****");
                         return true;
                     }
                     if (player.alive == true) {
@@ -282,7 +282,7 @@ public class Game {
                         System.out.println("ACTION : [ attack ] [ inventory ]");
                         String command = in.nextLine();
                         if (command.equals("attack")) {
-                            int totalAttackPower = (player.strength + player.weapon.strength);
+                            int totalAttackPower = (player.strength);
                             monster.decreaseHP(totalAttackPower);
                             fightState = !fightState;
                         } else if (command.equals("inventory")) {
@@ -318,21 +318,21 @@ public class Game {
                         return false;
                     }
                     if (monster.alive == true) {
-                        System.out.println("------------" + monster.name + " TURN-----------");
+                        System.out.println("------------" + monster.name.toUpperCase() + " TURN-----------");
                         monster.attack(player);
                         fightState = !fightState;
                     } else {
-                        System.out.println("*****" + monster.name + " was defeated*****");
+                        System.out.println("*****" + monster.name.toUpperCase() + " was defeated*****");
                         return true;
                     }
                 } else {
                     System.out.println(monster.name + " is faster than you.");
                     if (monster.alive == true) {
-                        System.out.println("------------" + monster.name + " TURN-----------");
+                        System.out.println("------------" + monster.name.toUpperCase() + " TURN-----------");
                         monster.attack(player);
                         fightState = !fightState;
                     } else {
-                        System.out.println("*****" + monster.name + " was defeated*****");
+                        System.out.println("*****" + monster.name.toUpperCase() + " was defeated*****");
                         return true;
                     }
                     if (player.alive == true) {

@@ -70,11 +70,12 @@ public class InfoCommand implements Command{
             if (game.currentRoom.downRoom != null) {
                 doorExist.add("south");
             }
-            String result = "Existing Door : [ " + doorExist.get(0);
+            String result = "Available Exit : [ " + doorExist.get(0);
             for (int i = 1; i < doorExist.size(); i++) {
                 result = result + " , " + doorExist.get(i);
             }
             System.out.println(result + " ]");
+            System.out.println("Monster Remaining : " + game.currentLevel.monsterNum);
         }
         else {
             System.out.println("!!Cannot use this command in start menu!!");

@@ -25,13 +25,15 @@ public class HelpCommand implements Command{
             System.out.println("[ attack ] : attack monsters in the area");
             System.out.println("[ inventory ] : open your inventory to use items");
             System.out.println("[ info ] : indicate player status");
+            System.out.println("[ save ] : save the game");
+            System.out.println("[ load ] : load save");
             System.out.println("[ quit ] : back to the game menu");
             System.out.println("[ exit ] : exit game");
         }
         else {
             System.out.println("###ALL COMMAND###");
             System.out.println("[ play ] : start game");
-            System.out.println("[ load ] : load check point from last save");
+            System.out.println("[ load ] : load save");
             System.out.println("[ exit ] : exit game");
         }
     }

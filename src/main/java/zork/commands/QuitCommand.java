@@ -28,12 +28,12 @@ public class QuitCommand implements Command{
                 String result = in.nextLine();
 
                 if (result.toUpperCase().equals("YES")) {
-                    System.out.println("Going back to the main menu...");
+                    System.out.println("...Back to the main menu...");
                     System.out.println("---------------------------");
                     game.setStartMenu();
                     break;
                 } else if (result.toUpperCase().equals("NO")) {
-                    System.out.println("Continue Playing");
+                    System.out.println(".....Continue Playing!.....");
                     System.out.println("---------------------------");
                     System.out.println("Now you are in " + game.currentRoom.name);
                     x = true;

@@ -93,11 +93,13 @@ public class LoadCommand implements Command{
 
                 }
                 else if (parameter.toLowerCase().equals("back")) {
-                    System.out.println("Back to the main menu");
+                    System.out.println("...Back to the main menu...");
+                    System.out.println("---------------------------");
+                    game.setStartMenu();
                     break;
                 }
                 else {
-                    System.out.println("!!!Nothing Save!!!");
+                    System.out.println("!!!Nothing Load!!!");
                 }
             }
         }
@@ -170,11 +172,13 @@ public class LoadCommand implements Command{
 
                 }
                 else if (parameter.toLowerCase().equals("back")) {
-                    System.out.println("Continue Playing");
+                    System.out.println(".....Continue Playing!.....");
+                    System.out.println("---------------------------");
+                    System.out.println("Now you are in " + game.currentRoom.name);
                     break;
                 }
                 else {
-                    System.out.println("!!!Nothing Save!!!");
+                    System.out.println("!!!Nothing Load!!!");
                 }
             }
         }

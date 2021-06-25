@@ -22,7 +22,7 @@ public class RightCommand implements Command {
                 Game.currentRoom = Game.currentRoom.rightRoom;
                 game.player.increaseHP(2);
                 System.out.println("Now you are in : [ " + Game.currentRoom.name + " ]");
-                String x = "Existing Door : |";
+                String x = "Available Exit : |";
                 if (game.currentRoom.rightRoom != null) {
                     x = x + " EAST : " + game.currentRoom.rightRoom.name + " |";
                 }

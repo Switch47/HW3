@@ -105,14 +105,26 @@ public class SaveCommand implements Command{
 
                 }
             }
-            writer.write("\n" + "setPlayer:" + game.player.HP + ":"
-                    + game.player.MAX_HP + ":"
-                    + game.player.strength + ":"
-                    + game.player.weapon.name + ":"
-                    + game.player.agility + ":"
-                    + game.player.exp + ":"
-                    + game.player.level + ":"
-                    + game.player.MAX_EXP);
+            if (game.player.weapon != null) {
+                writer.write("\n" + "setPlayer:" + game.player.HP + ":"
+                        + game.player.MAX_HP + ":"
+                        + game.player.strength + ":"
+                        + game.player.weapon.name + ":"
+                        + game.player.agility + ":"
+                        + game.player.exp + ":"
+                        + game.player.level + ":"
+                        + game.player.MAX_EXP);
+            }
+            else {
+                writer.write("\n" + "setPlayer:" + game.player.HP + ":"
+                        + game.player.MAX_HP + ":"
+                        + game.player.strength + ":"
+                        + null + ":"
+                        + game.player.agility + ":"
+                        + game.player.exp + ":"
+                        + game.player.level + ":"
+                        + game.player.MAX_EXP);
+            }
 
             String playerItems = "\n" + "setPlayerItems";
             if (game.player.items.size() > 0) {
