@@ -24,6 +24,7 @@ public class HelpCommand implements Command{
             System.out.println("[ drop ] : drop weapon/items to the floor");
             System.out.println("[ attack ] : attack monsters in the area");
             System.out.println("[ inventory ] : open your inventory to use items");
+            System.out.println("[ map ] : indicate map");
             System.out.println("[ info ] : indicate player status");
             System.out.println("[ save ] : save the game");
             System.out.println("[ load ] : load save");

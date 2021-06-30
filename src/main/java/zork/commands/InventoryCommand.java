@@ -19,26 +19,26 @@ public class InventoryCommand implements Command{
 
     @Override
     public void execute(Game game, List<String> argument) {
-        if (game.getGameStatus() == game.PLAY_STATUS) {
+        if (Game.getGameStatus() == Game.PLAY_STATUS) {
             Scanner in = new Scanner(System.in);
-            if (game.player.items.size() <= 0) {
+            if (Game.player.items.size() <= 0) {
                 System.out.println(" || INVENTORY || -> [ Empty ] ");
             } else {
-                String x = " || INVENTORY || -> [ " + game.player.items.get(0).name;
-                for (int i = 1; i < game.player.items.size(); i++) {
-                    x = x + " , " + game.player.items.get(0).name;
+                StringBuilder x = new StringBuilder(" || INVENTORY || -> [ " + Game.player.items.get(0).name);
+                for (int i = 1; i < Game.player.items.size(); i++) {
+                    x.append(" , ").append(Game.player.items.get(0).name);
                 }
+                boolean checkTrue = false;
+                while (!checkTrue) {
                 System.out.println(x + " ]");
                 System.out.println("Type [ back to game ] to continue playing");
-                boolean checkTrue = false;
-                while (checkTrue == false) {
                 String inventory = in.nextLine();
-                    for (Item item : game.player.items) {
+                    for (Item item : Game.player.items) {
                         if (inventory.equals("use " + item.name)) {
-                            game.player.increaseHP(item.addHP);
+                            Game.player.increaseHP(item.addHP);
                             System.out.println(item.skill);
-                            System.out.println("HP : " + game.player.HP);
-                            game.player.items.remove(item);
+                            System.out.println("HP : " + Game.player.HP);
+                            Game.player.items.remove(item);
                             checkTrue = true;
                             break;
                         } else if (inventory.equals("back to game")) {

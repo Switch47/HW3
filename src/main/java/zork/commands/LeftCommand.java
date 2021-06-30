@@ -45,6 +45,7 @@ public class LeftCommand implements Command{
                 System.out.println(x);
                 if (game.currentRoom.isMonsterExist()) {
                     System.out.println("There is a monster in this room!!!");
+                    System.out.println("Type [ Attack ] ");
                 }
             } else {
                 System.out.println("There is no door.");

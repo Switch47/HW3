@@ -32,41 +32,56 @@ public class SaveCommand implements Command{
     @Override
     public void execute(Game game, List<String> argument) throws IOException {
         if (game.getGameStatus() == game.PLAY_STATUS) {
-            Scanner in = new Scanner(System.in);
-            System.out.println("*****************************************");
-            System.out.println("                SAVE GAME                ");
-            System.out.println("          [ Save01 ] [ Save02 ]          ");
-            System.out.println("          [ Save03 ] [ Save04 ]          ");
-            System.out.println("          [ Save05 ] [ Save06 ]          ");
-            System.out.println("*****************************************");
-            System.out.println("PLEASE READ : type only the name of save.");
-            String parameter = in.nextLine();
-            if (parameter.toLowerCase().equals("save01")) {
-                String save01 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save01.txt";
-                saveFile(game, save01);
-                System.out.println("SAVE TO : Save01");
-            } else if (parameter.toLowerCase().equals("save02")) {
-                String save02 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save02.txt";
-                saveFile(game, save02);
-                System.out.println("SAVE TO : Save02");
-            } else if (parameter.toLowerCase().equals("save03")) {
-                String save03 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save03.txt";
-                saveFile(game, save03);
-                System.out.println("SAVE TO : Save03");
-            } else if (parameter.toLowerCase().equals("save04")) {
-                String save04 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save04.txt";
-                saveFile(game, save04);
-                System.out.println("SAVE TO : Save04");
-            } else if (parameter.toLowerCase().equals("save05")) {
-                String save05 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save05.txt";
-                saveFile(game, save05);
-                System.out.println("SAVE TO : Save05");
-            } else if (parameter.toLowerCase().equals("save06")) {
-                String save06 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save06.txt";
-                saveFile(game, save06);
-                System.out.println("SAVE TO : Save06");
-            } else {
-                System.out.println("!!!Nothing Save!!!");
+            while (true) {
+                Scanner in = new Scanner(System.in);
+                System.out.println("*****************************************");
+                System.out.println("                SAVE GAME                ");
+                System.out.println("          [ Save01 ] [ Save02 ]          ");
+                System.out.println("          [ Save03 ] [ Save04 ]          ");
+                System.out.println("          [ Save05 ] [ Save06 ]          ");
+                System.out.println("*****************************************");
+                System.out.println("PLEASE READ : type only the name of save.");
+                System.out.println("TYPE : {back} to continue playing");
+                String word = in.nextLine();
+                if (word.toLowerCase().equals("save01")) {
+                    String save01 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save01.txt";
+                    saveFile(game, save01);
+                    System.out.println("SAVE TO : Save01");
+                    break;
+                } else if (word.toLowerCase().equals("save02")) {
+                    String save02 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save02.txt";
+                    saveFile(game, save02);
+                    System.out.println("SAVE TO : Save02");
+                    break;
+                } else if (word.toLowerCase().equals("save03")) {
+                    String save03 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save03.txt";
+                    saveFile(game, save03);
+                    System.out.println("SAVE TO : Save03");
+                    break;
+                } else if (word.toLowerCase().equals("save04")) {
+                    String save04 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save04.txt";
+                    saveFile(game, save04);
+                    System.out.println("SAVE TO : Save04");
+                    break;
+                } else if (word.toLowerCase().equals("save05")) {
+                    String save05 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save05.txt";
+                    saveFile(game, save05);
+                    System.out.println("SAVE TO : Save05");
+                    break;
+                } else if (word.toLowerCase().equals("save06")) {
+                    String save06 = "C://Users//USER//IdeaProjects//Software System//hw3//src//main//java//zork//object//levels//Save//Save06.txt";
+                    saveFile(game, save06);
+                    System.out.println("SAVE TO : Save06");
+                    break;
+                } else if (word.toLowerCase().equals("back")) {
+                    System.out.println(".....Continue Playing!.....");
+                    System.out.println("---------------------------");
+                    System.out.println("Now you are in " + game.currentRoom.name);
+                    break;
+                }
+                else {
+                    System.out.println("!!!Nothing Save!!!");
+                }
             }
         }
         else {

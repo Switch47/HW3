@@ -24,7 +24,8 @@ public class CommandFactory {
             PlayCommand.class,
             QuitCommand.class,
             SaveCommand.class,
-            LoadCommand.class
+            LoadCommand.class,
+            MapCommand.class
     );
 
     private static final Map<String,Command> COMMAND_MAP = new HashMap<>();

@@ -26,9 +26,11 @@ public class Level1 extends Level {
     }
 
 
+
     public void loadMap(String filename) {
         try {
             roomLevel = new HashMap<>();
+            monsterNum = 0;
             Path filePath = new File(filename).toPath();
             Charset charset = Charset.defaultCharset();
             List<String> stringList = Files.readAllLines(filePath, charset);
