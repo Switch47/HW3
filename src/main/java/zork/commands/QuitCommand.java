@@ -2,6 +2,7 @@ package zork.commands;
 
 import zork.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class QuitCommand implements Command{
                     System.out.println("...Back to the main menu...");
                     System.out.println("---------------------------");
                     game.setStartMenu();
+                    game.listOfLevels = new ArrayList<>();
                     break;
                 } else if (result.toUpperCase().equals("NO")) {
                     System.out.println(".....Continue Playing!.....");

@@ -37,6 +37,7 @@ public class TakeCommand implements Command{
                 for (Item it : game.currentRoom.items) {
                     if (it.name.equals(item)) {
                         check = check + 1;
+
                         if (it instanceof Weapon) {
                             if (game.player.weapon == null) {
                                 game.player.pickWeapon(it);

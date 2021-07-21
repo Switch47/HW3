@@ -1,11 +1,7 @@
 package zork.commands;
 
 import zork.Game;
-import zork.object.Room;
 import zork.object.item.Item;
-import zork.object.levels.Level;
-import zork.object.levels.Level1;
-import zork.object.monster.Monster;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +9,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class SaveCommand implements Command{

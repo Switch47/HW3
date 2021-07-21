@@ -1,6 +1,6 @@
 name:EvilHouse
 object monster
-start bedroom1
+start kitchen
 right bedroom1 hallway1
 right hallway1 hallway2
 down hallway2 bedroom2
@@ -23,10 +23,8 @@ setItem:garden2:potion
 setItem:garden2:potion
 setMonster:bathroom1:zombie
 setItem:garage3:potion
-setItem:bedroom1:sword
-setItem:bedroom1:gun
 setItem:bedroom1:potion
+setItem:bedroom1:gun
 setMonster:garage2:zombie
-setMonster:kitchen:zombie
-setPlayer:100:100:10:null:10:0:1:100
+setPlayer:55:100:10:sword:10:50:1:100
 setPlayerItems:null

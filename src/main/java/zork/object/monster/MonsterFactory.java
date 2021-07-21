@@ -8,4 +8,6 @@ public class MonsterFactory {
     public Zombie makeZombie() {
         return new Zombie();
     }
+    public Werewolf makeWerewolf() {return new Werewolf();}
+    public Sephiroth makeSephiroth() {return new Sephiroth();}
 }

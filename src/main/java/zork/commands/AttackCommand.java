@@ -2,6 +2,7 @@ package zork.commands;
 
 import zork.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttackCommand implements Command{
@@ -27,6 +28,11 @@ public class AttackCommand implements Command{
 
                 } else {
                     System.out.println("*********You were defeated*********");
+                    System.out.println("*************Game Over*************");
+                    System.out.println("===================================");
+                    System.out.println("");
+                    game.listOfLevels = new ArrayList<>();
+                    game.setStartMenu();
                 }
             } else {
                 System.out.println("There is no any monster in this room");

@@ -24,6 +24,7 @@ public class PlayCommand implements Command{
     public void execute(Game game, List<String> argument) throws IOException {
         if (Game.getGameStatus() == Game.HOME_STATUS) {
             Game.player = new Player();
+            game.setMap();
             Scanner sc  = new Scanner(System.in);
 //            boolean check = false;
             while (true) {
@@ -32,13 +33,14 @@ public class PlayCommand implements Command{
                     x.append(", [ ").append(Game.listOfLevels.get(i).name).append(" ] ");
                 }
                 System.out.println(x);
-                System.out.println("[ back ]");
+                System.out.println("[ BACK ]");
                 System.out.println("TYPE : {map name} or {back}");
                 String levelName = sc.next();
                 if (levelName.equalsIgnoreCase("back")) {
                     System.out.println("  Back to the main menu!  ");
                     System.out.println("--------------------------");
                     game.setStartMenu();
+                    game.listOfLevels = new ArrayList<>();
                     break;
                 }
                 else {
@@ -52,9 +54,10 @@ public class PlayCommand implements Command{
                         System.out.println("There is no [ " + levelName + " ] map.");
                     } else {
                         for (Level level : Game.listOfLevels) {
-                            if (level.name.equalsIgnoreCase(levelName)) {
+                            Level new_level = level;
+                            if (new_level.name.equalsIgnoreCase(levelName)) {
                                 game.setStartPlay();
-                                game.inGame(level);
+                                game.inGame(new_level);
                             }
                         }
                         break;

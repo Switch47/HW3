@@ -13,4 +13,5 @@ public interface Command {
 
     void execute(Game game, List<String> argument) throws IOException;
 
+
 }

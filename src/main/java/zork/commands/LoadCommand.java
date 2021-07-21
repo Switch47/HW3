@@ -1,16 +1,15 @@
 package zork.commands;
 
 import zork.Game;
-import zork.object.levels.Level1;
+import zork.object.levels.Map;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class LoadCommand implements Command{
 
-    Level1 level = new Level1();
+    Map level = new Map();
 
     @Override
     public int numArgs() {

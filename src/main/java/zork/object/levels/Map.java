@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class Level1 extends Level {
+public class Map extends Level {
 
 
 
-    public Level1() {
+    public Map() {
     }
 
 
@@ -152,6 +152,10 @@ public class Level1 extends Level {
                         Monster monster = null;
                         if (monsterName.equals("zombie")) {
                             monster = monsterFactory.makeZombie();
+                        }else if (monsterName.equals("werewolf")) {
+                            monster = monsterFactory.makeWerewolf();
+                        }else if (monsterName.equals("sephiroth")) {
+                            monster = monsterFactory.makeSephiroth();
                         }
                         if (monster != null) {
                             roomLevel.get(room).setMonster(monster);
